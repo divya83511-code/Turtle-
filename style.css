@@ -1,0 +1,342 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Trebuchet MS", sans-serif;
+    color: white;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(150, 120, 255, 0.25), transparent 25%),
+        radial-gradient(circle at 80% 75%, rgba(255, 150, 210, 0.18), transparent 25%),
+        linear-gradient(145deg, #07091f, #14113b 45%, #281747);
+}
+
+/* Little glowing stars */
+body::before,
+body::after {
+    content: "✦   ·   ✧      ·   ✦     ·   ✧   ·";
+    position: fixed;
+    width: 100%;
+    left: 0;
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    letter-spacing: 10px;
+    pointer-events: none;
+}
+
+body::before {
+    top: 12%;
+    animation: starsMove 8s linear infinite;
+}
+
+body::after {
+    top: 78%;
+    font-size: 11px;
+    opacity: 0.5;
+    animation: starsMove 11s linear infinite reverse;
+}
+
+@keyframes starsMove {
+    0% {
+        transform: translateX(-20px);
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateX(20px);
+        opacity: 0.3;
+    }
+}
+
+/* Top stars */
+.stars {
+    position: fixed;
+    top: 22px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 7px;
+    opacity: 0.8;
+    z-index: 10;
+    animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.35;
+    }
+
+    to {
+        opacity: 0.95;
+    }
+}
+
+/* Slides */
+.slide {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+
+    padding: 65px 22px 30px;
+
+    text-align: center;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.slide.active {
+    display: flex;
+    animation: slideIn 0.7s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Glass effect around content */
+.slide::before {
+    content: "";
+    position: absolute;
+    width: min(92%, 430px);
+    height: 78%;
+    border-radius: 35px;
+
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.10);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35),
+        inset 0 0 30px rgba(255,255,255,0.025);
+
+    backdrop-filter: blur(5px);
+
+    z-index: -1;
+}
+
+/* Turtle */
+.turtle {
+    font-size: 88px;
+    margin-bottom: 16px;
+
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,0.35));
+
+    animation: turtleFloat 3s ease-in-out infinite;
+}
+
+.small-turtle {
+    font-size: 70px;
+}
+
+@keyframes turtleFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateY(-14px) rotate(3deg);
+    }
+}
+
+/* Text */
+.small-text {
+    font-size: 15px;
+    opacity: 0.65;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: clamp(35px, 10vw, 46px);
+    line-height: 1.08;
+    margin-bottom: 22px;
+
+    text-shadow:
+        0 0 18px rgba(255,255,255,0.18);
+}
+
+h2 {
+    font-size: clamp(29px, 8vw, 37px);
+    line-height: 1.1;
+    margin-bottom: 22px;
+
+    text-shadow:
+        0 0 18px rgba(255,255,255,0.16);
+}
+
+h3 {
+    font-size: 22px;
+    margin: 18px 0;
+}
+
+.message {
+    max-width: 370px;
+
+    font-size: 16px;
+    line-height: 1.75;
+
+    color: rgba(255,255,255,0.88);
+}
+
+.tiny-text {
+    margin-top: 16px;
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+.funny {
+    margin: 18px 0;
+
+    font-size: 17px;
+    line-height: 1.6;
+
+    color: rgba(255,255,255,0.9);
+}
+
+/* Personality cards */
+.personality-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+    width: 100%;
+    max-width: 390px;
+}
+
+.personality-box > div:not(.vs) {
+    width: 43%;
+
+    padding: 17px 9px;
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,0.075);
+
+    border: 1px solid rgba(255,255,255,0.13);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.18);
+
+    transition: transform 0.3s ease;
+}
+
+.personality-box > div:not(.vs):hover {
+    transform: translateY(-5px);
+}
+
+.personality-box h3 {
+    margin: 0 0 10px;
+}
+
+.personality-box p {
+    font-size: 13px;
+    margin: 8px 0;
+    opacity: 0.82;
+}
+
+.vs {
+    font-weight: bold;
+    font-size: 13px;
+    opacity: 0.55;
+}
+
+/* Buttons */
+button {
+    margin-top: 20px;
+
+    padding: 14px 28px;
+
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+
+    background: rgba(255,255,255,0.12);
+    color: white;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.25);
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: rgba(255,255,255,0.19);
+    box-shadow:
+        0 14px 35px rgba(0,0,0,0.32);
+}
+
+button:active {
+    transform: scale(0.94);
+}
+
+/* Final slide */
+#slide4 h3 {
+    margin-top: 22px;
+}
+
+#slide4 .turtle {
+    animation-duration: 2.5s;
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+
+    .slide {
+        padding-left: 17px;
+        padding-right: 17px;
+    }
+
+    .slide::before {
+        height: 82%;
+    }
+
+    .turtle {
+        font-size: 70px;
+    }
+
+    .small-turtle {
+        font-size: 58px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+
+    .personality-box > div:not(.vs) {
+        padding: 14px 6px;
+    }
+
+    .personality-box p {
+        font-size: 12px;
+    }
+}
